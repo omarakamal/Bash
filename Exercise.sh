@@ -86,3 +86,31 @@ else
 	echo SELINUX=disabled >> /etc/selinux/config
 fi
 
+if rpm -qa |grep nfs-utils
+then
+	echo "nfs server is already installed"
+else
+	yum install nfs-utils -y
+
+if cat /etc/passwd |grep Andrew
+then
+	echo "Andrew is already a user"
+else
+	useradd Andrew -1009
+fi
+
+echo "Andrew" > passwd Andrew
+
+if cat /etc/group |grep Andrews_Group
+then
+	echo "Andrews_Group is already created"
+else
+	groupadd Andrews_Group
+fi
+
+while IFS=, read -r username maingroup
+do
+   adduser --ingroup "Andrews_Group" "Andrew"
+done < Andrew.txt
+
+
