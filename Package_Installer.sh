@@ -7,4 +7,3 @@ then
 else
         yum install "$package" -y
 fi
-~
